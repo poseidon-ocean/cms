@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	
+	<include file="lt-struts-defaults.xml"></include>
+	<!-- 开启spring管理和实例化struts2的对象所有的实例 
+	<constant name="struts.objectFactory" value="spring" />
+	<package name="pack"  namespace="/C" extends="struts-default">
+		<action name="content" method="index" class="contentAction">
+			<result>/index.jsp</result>
+		</action>	
+	</package>-->
+	
+	<!-- <constant name="struts.objectFactory" value="spring" />
+	<package name="pack"  namespace="/" extends="struts-default">
+		<action name="index" class="indexAction">
+			<result>/WEB-INF/pages/index.jsp</result>
+		</action>	
+	</package> -->
+</struts>

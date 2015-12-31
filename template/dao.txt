@@ -1,0 +1,17 @@
+package com.lt.dao.[lowEntity];
+
+
+import com.lt.core.dao.IBaseDao;
+import com.lt.model.[entity];
+
+/**
+ * 
+ * 内容接口
+ * I[entity]Dao
+ * 创建人:poseidon
+ * 时间：2015年12月25日-下午9:21:05 
+ * @version 1.0.0
+ *
+ */
+public interface I[entity]Dao extends IBaseDao<[entity],Integer> {
+}

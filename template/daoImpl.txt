@@ -1,0 +1,24 @@
+package com.lt.dao.[lowEntity].impl;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+import com.lt.core.dao.BaseDaoImpl;
+import com.lt.dao.[lowEntity].I[entity]Dao;
+import com.lt.model.[entity];
+
+/**
+ * 
+ * 内容管理
+ * [entity]DaoImpl
+ * 创建人:poseidon
+ * 时间：2015年12月5日-下午9:22:42 
+ * @version 1.0.0
+ *
+ */
+@Repository
+@Transactional
+public class [entity]DaoImpl extends BaseDaoImpl<[entity],Integer> implements I[entity]Dao{
+
+}

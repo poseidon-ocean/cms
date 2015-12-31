@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 配置一些整个项目通用和全局的配置，比如登陆，拦截器 -->
+	<!-- 如果你url里面加入/json那么就会进入这个包 -->
+	<package name="defaults" extends="json-default">
+		<interceptors>
+			<interceptor name="methodInterceptor" class="methodInterceptor"></interceptor>
+			<interceptor name="loginInterceptor" class="loginInterceptor"></interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="methodInterceptor"></interceptor-ref>
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	
+		
+		<global-results>
+			<result name="error" type="redirect">/405.jsp</result>
+			<result name="toIndex" type="redirect">index</result>
+			<result name="toLogin" type="redirect">login</result>
+		</global-results>
+	</package>
+	
+	<!-- ajax配置 -->
+	<package name="jsonpack" namespace="/json" extends="defaults">
+		<action name="logined" method="logined" class="loginAction">
+			<result type="json" name="ajaxSuccess">
+				<param name="ignoreHierarchy">false</param><!-- 这个属性表示是否忽略等级，也就是继承关系,设置为 false 后会将父类和子类的属性一起返回 -->
+				<param name="excludeNullProperties">true</param><!-- 这个属性表示去除空数据 -->
+			</result>
+		</action>
+		<action name="/*/*" method="{2}" class="{1}Action">
+			<result type="json" name="ajaxSuccess">
+				<param name="ignoreHierarchy">false</param><!-- 这个属性表示是否忽略等级，也就是继承关系,设置为 false 后会将父类和子类的属性一起返回 -->
+				<param name="excludeNullProperties">true</param><!-- 这个属性表示去除空数据 -->
+			</result>
+			<interceptor-ref name="loginStack"></interceptor-ref>
+		</action>
+	</package>
+
+	<!-- 登陆和首页 -->
+	<package name="loginpackage" extends="defaults">
+		<action name="/admin/*/*" method="{2}" class="{1}Action">
+			<result name="{2}">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+		<action name="index" class="indexAction">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+			<result>/WEB-INF/pages/index.jsp</result>
+		</action>
+		<action name="logout" method="logout" class="loginAction">
+			<interceptor-ref name="methodInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="login" method="login" class="loginAction">
+			<result name="login">/WEB-INF/pages/login.jsp</result>
+			<interceptor-ref name="methodInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="uploadpackage" extends="struts-default">
+		<action name="upload/*" method="{1}" class="uploadAction">
+			<result name="{1}">/WEB-INF/pages/upload/{1}.jsp</result>
+			<result name="callback">/WEB-INF/pages/upload/callback.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,18 @@
+package com.lt.service.[lowEntity];
+
+import com.lt.service.IBaseService;
+import com.lt.bean.[entity];
+
+/**
+ * 
+ * 内容业务层
+ * I[entity]Service
+ * 创建人:poseidon
+ * 时间：2015年12月25日-下午9:34:13 
+ * @version 1.0.0
+ *
+ */
+public interface I[entity]Service extends IBaseService<[entity],Integer> {
+
+	
+}
