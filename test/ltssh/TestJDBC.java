@@ -2,6 +2,8 @@ package ltssh;
 
 
 
+import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -30,5 +32,10 @@ public class TestJDBC {
 		
 		Connection connection = data.getConnection();
 		System.out.println("+==="+connection);
+	}
+	
+	@Test
+	public void testGit() throws Exception {
+		System.out.println("hello git");
 	}
 }
