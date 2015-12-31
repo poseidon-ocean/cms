@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<!-- 自定义标签的描述 -->
+	<description>自定义标签rz</description>
+	<display-name>自定一标签-函数形式</display-name>
+	<tlib-version>1.0</tlib-version>
+	<!-- 自定义标签的前缀 -->
+	<short-name>rz</short-name>
+	<uri></uri>
+	
+	<tag>
+		<description>权限标签</description>
+		<name>permission</name>
+		<tag-class>com.lt.core.tag.LtPermissionTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>model</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+		<attribute>
+			<name>method</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+	</tag>
+	
+	<tag>
+		<description>if标签</description>
+		<name>if</name>
+		<tag-class>com.lt.core.tag.TmIfTag</tag-class>
+		<!-- 如果没有标签体，设置empty , 如果有标签休必须设置JSP -->
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>elseif标签</description>
+		<name>elseif</name>
+		<tag-class>com.lt.core.tag.TmElseIfTag</tag-class>
+		<!-- 如果没有标签体，设置empty , 如果有标签休必须设置JSP -->
+		<body-content>empty</body-content>
+		<attribute>
+			<name>test</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>else标签</description>
+		<name>else</name>
+		<tag-class>com.lt.core.tag.TmElseTag</tag-class>
+		<!-- 如果没有标签体，设置empty , 如果有标签休必须设置JSP -->
+		<body-content>empty</body-content>
+	</tag>
+	
+	
+	<function>
+		<description>地图解析</description>
+		<name>toMap</name>
+		<function-class>com.lt.util.LtFunctions</function-class>
+		<function-signature>java.lang.String toMap(java.lang.String)</function-signature>
+		<example>${lt:toMap("1#22#22#33")}===</example>
+	</function>
+	
+	
+	<function>
+		<description>获取集合和数组的长度</description>
+		<name>size</name>
+		<function-class>com.lt.util.LtFunctions</function-class>
+		<function-signature>int getLength(java.util.Collection)</function-signature>
+		<example>${lt:size(lists)}==2=</example>
+	</function>
+	
+	<function>
+		<description>格式化日期-string</description>
+		<name>dateFormat</name>
+		<function-class>com.lt.util.LtFunctions</function-class>
+		<function-signature>java.lang.String dateFormat(java.lang.String,java.lang.String)</function-signature>
+		<example>${lt:dateFormat("1#22#22#33")}===</example>
+	</function>
+	
+	<function>
+		<description>格式化日期-date</description>
+		<name>formateDate</name>
+		<function-class>com.lt.util.LtFunctions</function-class>
+		<function-signature>java.lang.String formateDate(java.util.Date,java.lang.String)</function-signature>
+		<example>${lt:formateDate("1#22#22#33")}===</example>
+	</function>
+	
+	<function>
+		<description>indexOf查找</description>
+		<name>indexOf</name>
+		<function-class>com.lt.util.LtFunctions</function-class>
+		<function-signature>int indexOf(java.lang.String ,java.lang.String)</function-signature>
+		<example>${rz:indexOf("1#22#22#33",'2')}===</example>
+	</function>
+	
+</taglib>
