@@ -186,5 +186,10 @@ public class JunitApplication {
 		System.out.println("一共耗时:"+(time/1000)+"s");
 	}
 	
+	@Test
+	public void handler7(){
+		Content content = contentDao.get(1);
+		System.out.println(content.getTitle());
+	}
 	
 }
