@@ -12,4 +12,6 @@ public interface IContentDao extends IBaseDao<Content, Integer>{
 	public List<Content> findContents(TmParams params,TmPageInfo pageInfo);
 	//统计总数
 	public int countContent(TmParams params);
+	//批量保存
+	public void saveBatch(List<Content> contents);
 }

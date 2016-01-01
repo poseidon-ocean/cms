@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -43,6 +44,31 @@ public class ContentDaoImpl extends BaseDaoImpl<Content, Integer> implements ICo
 		detachedCriteria.setProjection(Projections.count("id"));
 		Number number = (Number)detachedCriteria.getExecutableCriteria(getSession()).uniqueResult();
 		return number==null?0:number.intValue();
+	}
+	//批量保存
+	@Override
+	public void saveBatch(List<Content> contents) {//数据的导入和导出,excel表的数据导入到数据库中
+		Session session = getSession();
+		for (int i = 0; i < contents.size(); i++) {
+			session.save(contents.get(i));
+			if(i%50==0){
+				session.flush();
+				session.clear();
+			}
+		}
+	}
+	
+	//批量修改
+	public void updateBatch(List<Content> contents) {
+		Session session = getSession();
+		for (int i = 0; i < contents.size(); i++) {
+//			必须根据id去更新
+			session.update(contents.get(i));
+			if(i%50==0){
+				session.flush();
+				session.clear();
+			}
+		}
 	}
 
 }

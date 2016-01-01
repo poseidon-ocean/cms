@@ -159,7 +159,7 @@ public class JunitApplication {
 	public void handler5(){
 		Date sdate = new Date();
 		Content content = null;
-		for (int i = 0; i < 1000;i++) {
+		for (int i = 0; i < 10000;i++) {
 			content = new Content();
 			content.setTitle(i+"");
 			content.setContent(i+"i");
@@ -167,7 +167,7 @@ public class JunitApplication {
 			System.out.println("==========="+i+"已保存成功==========");
 		}
 		long time = new Date().getTime() - sdate.getTime();
-		System.out.println("一共耗时:"+time+"ms");
+		System.out.println("一共耗时:"+(time/1000)+"s");
 	}
 	
 	
@@ -181,7 +181,7 @@ public class JunitApplication {
 			content.setContent(i+"i");
 			contents.add(content);
 		}
-//		contentDao.saveBatch(contents);
+		contentDao.saveBatch(contents);
 		long time = new Date().getTime() - sdate.getTime();
 		System.out.println("一共耗时:"+(time/1000)+"s");
 	}

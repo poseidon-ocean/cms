@@ -1,26 +1,30 @@
 package com.lt.service.[lowEntity].impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lt.core.dao.TmParams;
 import com.lt.core.service.BaseServiceImpl;
 import com.lt.dao.[lowEntity].I[entity]Dao;
 import com.lt.model.[entity];
 import com.lt.service.[lowEntity].I[entity]Service;
+import com.lt.util.TmPageInfo;
 
 /**
  * 
- * 
+ * [description]
  * [entity]ServiceImpl 
- * 创建人:posiedon 
- * 时间：2015年12月25日-下午9:35:29
+ * 创建人:[author] 
+ * 时间：[date]
  * 
  * @version 1.0.0
  * 
  */
 @Service
 public class [entity]ServiceImpl extends BaseServiceImpl<[entity],Integer>  implements I[entity]Service {
-	
+		
 	public I[entity]Dao get[entity]Dao() {
 		return (I[entity]Dao) super.getBaseDao();
 	}
@@ -30,4 +34,32 @@ public class [entity]ServiceImpl extends BaseServiceImpl<[entity],Integer>  impl
 		super.setBaseDao([lowEntity]Dao);
 	}
 	
+	/**
+	 * 查询所有的内容--永远都在一起的，求总数
+	 * 方法名：find[entity]s
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @param params
+	 * @param pageInfo
+	 * @return List<[entity]>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<[entity]> find[entity]s(TmParams params,TmPageInfo pageInfo){
+		return get[entity]Dao().find[entity]s(params, pageInfo);
+	}
+	
+	/**
+	 * 求总数
+	 * 方法名：count[entity]
+	 * 创建人：[author] 
+	 * 时间：[date]
+	 * @param params
+	 * @return int
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public int count[entity](TmParams params){
+		return get[entity]Dao().count[entity](params);
+	}
 }
