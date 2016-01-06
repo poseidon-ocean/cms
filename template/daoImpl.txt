@@ -11,12 +11,12 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.lt.core.dao.BaseDaoImpl;
+import com.lt.base.BaseDaoImpl;
 import com.lt.core.dao.TmParams;
 import com.lt.dao.[lowEntity].I[entity]Dao;
-import com.lt.model.[entity];
+import com.lt.bean.[entity];
 import com.lt.util.TmPageInfo;
-import com.lt.util.TzStringUtils;
+import com.lt.util.LtStringUtils;
 
 /**
  * 
@@ -47,7 +47,7 @@ public class [entity]DaoImpl extends BaseDaoImpl<[entity],Integer> implements I[
 	public List<[entity]> find[entity]s(TmParams params,TmPageInfo pageInfo){
 		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
 		if(params!=null){
-			if(TzStringUtils.isNotEmpty(params.getKeyword())){
+			if(LtStringUtils.isNotEmpty(params.getKeyword())){
 				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
 			}
 		}
@@ -69,7 +69,7 @@ public class [entity]DaoImpl extends BaseDaoImpl<[entity],Integer> implements I[
 	public int count[entity](TmParams params){
 		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
 		if(params!=null){
-			if(TzStringUtils.isNotEmpty(params.getKeyword())){
+			if(LtStringUtils.isNotEmpty(params.getKeyword())){
 				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
 			}
 		}

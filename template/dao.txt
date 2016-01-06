@@ -3,9 +3,9 @@ package com.lt.dao.[lowEntity];
 
 import java.util.List;
 
-import com.lt.core.dao.IBaseDao;
+import com.lt.base.IBaseDao;
 import com.lt.core.dao.TmParams;
-import com.lt.model.[entity];
+import com.lt.bean.[entity];
 import com.lt.util.TmPageInfo;
 
 

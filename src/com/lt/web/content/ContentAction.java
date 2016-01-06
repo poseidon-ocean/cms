@@ -47,6 +47,16 @@ public class ContentAction  extends BaseAction{
 		page.setItemCount(String.valueOf(itemCount));
 		return "list";
 	}
+	/**
+	 * 
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 * 
+	 */
+	public String falls(){
+		return "falls";
+	}
 	
 	/**
 	 * 渲染模板的方法

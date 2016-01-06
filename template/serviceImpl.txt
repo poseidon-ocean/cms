@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lt.core.dao.TmParams;
-import com.lt.core.service.BaseServiceImpl;
+import com.lt.base.BaseServiceImpl;
 import com.lt.dao.[lowEntity].I[entity]Dao;
-import com.lt.model.[entity];
+import com.lt.bean.[entity];
 import com.lt.service.[lowEntity].I[entity]Service;
 import com.lt.util.TmPageInfo;
 

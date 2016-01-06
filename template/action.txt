@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.lt.core.Method;
-import com.lt.core.action.BaseAction;
+import com.lt.base.BaseAction;
 import com.lt.core.interceptor.LtRequestMethod;
 import com.lt.bean.[entity];
 import com.lt.bean.User;
@@ -91,7 +91,7 @@ public class [entity]Action extends BaseAction{
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	@Method(method=TZRequestMethod.POST)
+	@Method(method=LtRequestMethod.POST)
 	public String save(){
 		[lowEntity].setUser(new User(1));
 		[lowEntity].setStatus(1);

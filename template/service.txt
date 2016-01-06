@@ -3,8 +3,8 @@ package com.lt.service.[lowEntity];
 import java.util.List;
 
 import com.lt.core.dao.TmParams;
-import com.lt.core.service.IBaseService;
-import com.lt.model.[entity];
+import com.lt.base.IBaseService;
+import com.lt.bean.[entity];
 import com.lt.util.TmPageInfo;
 
 /**

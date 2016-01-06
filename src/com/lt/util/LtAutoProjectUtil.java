@@ -16,11 +16,11 @@ import org.apache.commons.io.FileUtils;
  */
 public class LtAutoProjectUtil {
 	
-	private static String author="Allen";
-	private static  String description = "学生管理";
+	private static String author="poseidon";
+	private static  String description = "栏目管理";
 	private static  String date = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
-	private static  String entity = "Student";
-	private static  String lowEntity = "student";
+	private static  String entity = "Channel";
+	private static  String lowEntity = "channel";
 	
 	//定义所有模板目录
 	
@@ -43,7 +43,7 @@ public class LtAutoProjectUtil {
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, entity+".java");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class LtAutoProjectUtil {
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, "I"+entity+"Dao.java");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,7 +97,7 @@ public class LtAutoProjectUtil {
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, entity+"DaoImpl.java");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,7 +150,7 @@ public class LtAutoProjectUtil {
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, entity+"ServiceImpl.java");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -170,7 +170,7 @@ public class LtAutoProjectUtil {
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, entity+"Action.java");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -190,25 +190,100 @@ public class LtAutoProjectUtil {
 			String daoTemplate = getPath("template\\list.txt");
 			String result = replaceModel(daoTemplate);
 			//要生成的根目录
-			String daoRoot =  getPath("WebRoot\\WEB-INF\\pages\\"+lowEntity);
+			String daoRoot =  getPath("WebContent\\WEB-INF\\pages\\"+lowEntity);
 			File rootPath  = new File(daoRoot);
 			//如果不存在那么久创建
 			if(!rootPath.exists())rootPath.mkdirs();
 			//产生接口文件
 			File daoJava = new File(rootPath, "list.jsp");
-			//讲模板中替换好的数据通过写入目录中去
+			//将模板中替换好的数据通过写入目录中去
 			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * listtemplate页面
+	 * 方法名：createDao
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public static void createListTemplate(){
+		try {
+			//模板页面
+			String daoTemplate = getPath("template\\listTemplate.txt");
+			String result = replaceModel(daoTemplate);
+			//要生成的根目录
+			String daoRoot =  getPath("WebContent\\WEB-INF\\pages\\"+lowEntity);
+			File rootPath  = new File(daoRoot);
+			//如果不存在那么久创建
+			if(!rootPath.exists())rootPath.mkdirs();
+			//产生接口文件
+			File daoJava = new File(rootPath, "listTemplate.jsp");
+			//将模板中替换好的数据通过写入目录中去
+			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * js
+	 * 方法名：createJs
+	 * 时间：2015年5月17日-上午12:20:53  void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public static void createJs(){
+		try {
+			//模板页面
+			String daoTemplate = getPath("template\\js.txt");
+			String result = replaceModel(daoTemplate);
+			//要生成的根目录
+			String daoRoot =  getPath("WebContent\\js\\admin\\"+lowEntity);
+			File rootPath  = new File(daoRoot);
+			//如果不存在那么久创建
+			if(!rootPath.exists())rootPath.mkdirs();
+			//产生接口文件
+			File daoJava = new File(rootPath, "lt_"+lowEntity+".js");
+			//将模板中替换好的数据通过写入目录中去
+			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * js
+	 * 方法名：createJs
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public static void createAdd(){
+		try {
+			//模板页面
+			String daoTemplate = getPath("template\\edit.txt");
+			String result = replaceModel(daoTemplate);
+			//要生成的根目录
+			String daoRoot =  getPath("WebContent\\WEB-INF\\pages\\"+lowEntity);
+			File rootPath  = new File(daoRoot);
+			//如果不存在那么久创建
+			if(!rootPath.exists())rootPath.mkdirs();
+			//产生接口文件
+			File daoJava = new File(rootPath, "edit.jsp");
+			//将模板中替换好的数据通过写入目录中去
+			FileUtils.writeStringToFile(daoJava, result, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static String replaceModel(String path) throws IOException{
 		String result = FileUtils.readFileToString(new File(path),"UTF-8");
 		result = result.replaceAll("\\[entity\\]", entity)
-				.replaceAll("\\[lowEntity\\]", lowEntity)
 				.replaceAll("\\[author\\]", author)
+				.replaceAll("\\[lowEntity\\]", lowEntity)
 				.replaceAll("\\[description\\]", description)
 				.replaceAll("\\[date\\]", date);
 		return result;
@@ -255,12 +330,15 @@ public class LtAutoProjectUtil {
 //		for (Map.Entry<Object, Object> entry: properties.entrySet()) {
 //			System.out.println(entry.getKey()+"==="+entry.getValue());
 //		}
-//		createEntity();
-//		createDao();
-//		createDaoImpl();
-//		createService();
-//		createServiceImpl();
-//		createAction();
-//		createList();
+		createEntity();
+		createDao();
+		createDaoImpl();
+		createService();
+		createServiceImpl();
+		createAction();
+		createList();
+		createListTemplate();
+		createJs();
+		createAdd();
 	}
 }
