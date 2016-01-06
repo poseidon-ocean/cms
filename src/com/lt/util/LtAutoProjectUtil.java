@@ -330,6 +330,7 @@ public class LtAutoProjectUtil {
 //		for (Map.Entry<Object, Object> entry: properties.entrySet()) {
 //			System.out.println(entry.getKey()+"==="+entry.getValue());
 //		}
+		System.out.println("自动创建项目模块--->开始");
 		createEntity();
 		createDao();
 		createDaoImpl();
@@ -340,5 +341,6 @@ public class LtAutoProjectUtil {
 		createListTemplate();
 		createJs();
 		createAdd();
+		System.out.println("自动创建项目模块--->结束");
 	}
 }

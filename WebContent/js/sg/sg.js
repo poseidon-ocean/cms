@@ -163,9 +163,9 @@
 		}
 	};
 	
-	$.fn.tmTip = function(options){
+	$.fn.tzTip = function(options){
 		return this.each(function(){
-			var opts = $.extend({},$.fn.tmTip.defaults,options,$.fn.tmTip.parseOptions($(this)));
+			var opts = $.extend({},$.fn.tzTip.defaults,options,$.fn.tzTip.parseOptions($(this)));
 			if(opts.event=='hover'){
 				$(this).hover(function(){
 					tipInit($(this),opts);
@@ -342,7 +342,7 @@
 		}	
 	};
 
-	$.fn.tmTip.parseOptions = function($target) {
+	$.fn.tzTip.parseOptions = function($target) {
 		return {
 			width : $target.attr("width"),
 			height : $target.attr("height"),
@@ -358,7 +358,7 @@
 			proxy:$target.attr("proxy")
 		};
 	};
-	$.fn.tmTip.defaults ={
+	$.fn.tzTip.defaults ={
 		width : 0,//宽度
 		height : 0,//高度如果为0则为自动高度
 		title:"",//如果tip为空用title
@@ -695,6 +695,38 @@ $.tzPrompt = function(options){
 	});
 };
 
+$.tzIframe = function(options){
+	var opts = $.extend({},$.tzDialog.methods,$.tzDialog.defaults,options);
+	var $dialog = opts.init(opts);
+	$dialog.find(".tzdialog_message").html("<div  class='tm-dialog-loading tmWindow_loading' style='position:absolute;top:30%;left:43%;'><img src='../../images/loading.gif'><label style='font-size:12px;'>请稍后，正在加载中...</label></div>");
+	var iframe=document.createElement("iframe");
+	iframe.id = opts.dialogId+"_iframe";
+	iframe.width="100%";
+	iframe.height="100%";
+	iframe.scrolling="no";
+	iframe.frameborder ="0";
+	var src = "";
+	if(opts.content.indexOf("?")==-1){
+		src = opts.content+"?window=true";
+	}else{
+		src = opts.content+"&window=true";
+	}
+	iframe.src=src;
+	iframe.style.display ="none";
+	$(iframe).attr("frameborder","0");
+	$dialog.find(".tzdialog_message").height(opts.height-65).css("padding","1px").append(iframe);
+	$(iframe).load(function(){
+		$dialog.find(".tmWindow_loading").remove();
+		iframe.style.display ="block";
+		if(opts.loadSuccess)opts.loadSuccess(iframe.contentWindow);
+	});
+	
+	$dialog.find(".tzdialog_ok").off("click").on("click",function(){
+		if(opts.callback)opts.callback(iframe.contentWindow,$dialog,opts);
+	});
+};
+
+
 $.tzAlert = function(options){
 	var opts = $.extend({},$.tzDialog.methods,$.tzDialog.defaults,options);
 	opts.icon = "tip";
@@ -822,7 +854,7 @@ $.tzAjax = {
 				$.tzAjax.ajaxMain(opts,_url,dataJson);
 			},200);
 		}else{
-			$.tzAjax.ajaxMain(opts,_url,dataJson);
+			$.tzAjax.ajaxMain(opts,_url,dataJson);//做权限的时候，统一ajax拦截登陆的时候，有意义
 		}
 	},
 	ajaxMain:function(opts,_url,dataJson){
@@ -833,8 +865,13 @@ $.tzAjax = {
 			beforeSend:function(){opts.before();},
 			error:function(){loading("抱歉！因为操作不能够及时响应，请稍后在试...",1);opts.error();clearTimeout(ajaxTimeout);},
 			success:function(data){
-				if(data.result=="logout"){
-					loading("session超时,请登录...");
+				if(data=="logout"){
+					loading("session超时,请登录...",4);
+					window.location.href = basePath+"/login";
+					//弹出登陆框
+				}else if(data=="nopermission"){
+					loading("非常抱歉,您没有权限...",4);
+					window.location.href = basePath+"/error";
 				}else{
 					if(opts.callback)opts.callback(data);
 				}
@@ -845,46 +882,46 @@ $.tzAjax = {
 };
 
 $.tzConsole = (function(){
-	var arr =[];
-	var speed = 50;
-	var wordbox = null;
-	var c = "",index = 0,pos = 0;
-	var strLen = 0,tlen =0;
-		var row = 0;
-		function setData(targetId,sp,data){
-			arr = data;
-			speed = sp||50;
-			wordbox = document.getElementById(targetId);
-			strLen = arr[0].length;
-			tlen = arr.length; 
-			start();
+var arr =[];
+var speed = 50;
+var wordbox = null;
+var c = "",index = 0,pos = 0;
+var strLen = 0,tlen =0;
+	var row = 0;
+	function setData(targetId,sp,data){
+		arr = data;
+		speed = sp||50;
+		wordbox = document.getElementById(targetId);
+		strLen = arr[0].length;
+		tlen = arr.length; 
+		start();
+	}
+	
+	function start(){
+		c='';
+		row = Math.max(0,index-tlen);
+		while(row < index){
+			c += arr[row++] + '\r\n';
 		}
-		
-		function start(){
-			c='';
-			row = Math.max(0,index-tlen);
-			while(row < index){
-				c += arr[row++] + '\r\n';
-			}
-			wordbox.innerText = c+arr[index].slice(0,pos)+"_"; 
-			wordbox.scrollTop=wordbox.scrollHeight;
-			if(pos==strLen){
-				pos = 0;
-				c = arr[index]+"\r\n";
-				index ++;			
-				if(index < tlen){
-					strLen = arr[index].length;
-					setTimeout(start,300);
-				}else{
-					wordbox.innerText = wordbox.innerText.replace("_","");
-					}
-				}else{
-					pos++;
-					setTimeout(start,speed);
+		wordbox.innerText = c+arr[index].slice(0,pos)+"_"; 
+		wordbox.scrollTop=wordbox.scrollHeight;
+		if(pos==strLen){
+			pos = 0;
+			c = arr[index]+"\r\n";
+			index ++;			
+			if(index < tlen){
+				strLen = arr[index].length;
+				setTimeout(start,300);
+			}else{
+				wordbox.innerText = wordbox.innerText.replace("_","");
 				}
-		}
-		
-		return {
-			console:setData	
-		};
-	})();
+			}else{
+				pos++;
+				setTimeout(start,speed);
+			}
+	}
+	
+	return {
+		console:setData	
+	};
+})();

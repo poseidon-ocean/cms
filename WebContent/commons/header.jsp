@@ -13,12 +13,6 @@
            		<rz:else/>
            			<rz:permission method="list" model="content"><li><a href="${basePath}/admin/content/list">内容管理</a></li></rz:permission>
            		</rz:if>
-           		<rz:if test="${rz:indexOf(pageContext.request.requestURI,'content/falls')!=-1}">
-		            <rz:permission method="list" model="content"><li class="select"><a href="javascript:void(0);">内容管理</a></li></rz:permission>
-           		<rz:else/>
-           			<rz:permission method="list" model="content"><li><a href="${basePath}/admin/content/falls">内容管理</a></li></rz:permission>
-           		</rz:if>
-           		
            		<rz:if test="${rz:indexOf(pageContext.request.requestURI,'channel/list')!=-1}">
 		            <rz:permission method="list" model="content"><li class="select"><a href="javascript:void(0);">栏目管理</a></li></rz:permission>
            		<rz:else/>
