@@ -29,6 +29,9 @@ public class ContentDaoImpl extends BaseDaoImpl<Content, Integer> implements ICo
 			if(LtStringUtils.isNotEmpty(params.getKeyword())){
 				detachedCriteria.add(Restrictions.like("title", params.getKeyword(),MatchMode.ANYWHERE));
 			}
+			if(params.getChannelId()!=null){
+				detachedCriteria.add(Restrictions.eq("channel.id", params.getChannelId()));
+			}
 		}
 		detachedCriteria.addOrder(Order.desc("createTime"));
 		return findByDetachedCriteria(detachedCriteria,pageInfo);
@@ -39,6 +42,9 @@ public class ContentDaoImpl extends BaseDaoImpl<Content, Integer> implements ICo
 		if(params!=null){
 			if(LtStringUtils.isNotEmpty(params.getKeyword())){
 				detachedCriteria.add(Restrictions.like("title", params.getKeyword(),MatchMode.ANYWHERE));
+			}
+			if(params.getChannelId()!=null){
+				detachedCriteria.add(Restrictions.eq("channel.id", params.getChannelId()));
 			}
 		}
 		detachedCriteria.setProjection(Projections.count("id"));

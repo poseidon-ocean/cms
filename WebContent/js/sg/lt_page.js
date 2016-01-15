@@ -45,11 +45,11 @@
 			page_id = page_id<0?0:(page_id<np?page_id:np-1); // Normalize page id to sane value
 			appendopts = $.extend({text:page_id+1, classes:""}, appendopts||{});
 			if(page_id == current_page){
-				lnk = $("<span class='current'>" + appendopts.text + "</span>");
+				lnk = $("<span class='current tzui-tips'>" + appendopts.text + "</span>");
 			}
 			else
 			{
-				lnk = $("<a>" + appendopts.text + "</a>")
+				lnk = $("<a class='tzui-tips'>" + appendopts.text + "</a>")
 					.attr('href', this.opts.link_to.replace(/__id__/,page_id));
 			}
 			if(appendopts.classes){ lnk.addClass(appendopts.classes); }
@@ -81,7 +81,7 @@
 				this.appendRange(fragment, current_page, 0, end, {classes:'sp'});
 				if(this.opts.num_edge_entries < interval.start && this.opts.ellipse_text)
 				{
-					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+					jQuery("<span class='tmui-tips'>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
 				}
 			}
 			// Generate interval links
@@ -91,7 +91,7 @@
 			{
 				if(np-this.opts.num_edge_entries > interval.end && this.opts.ellipse_text)
 				{
-					jQuery("<span>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
+					jQuery("<span class='tzui-tips'>"+this.opts.ellipse_text+"</span>").appendTo(fragment);
 				}
 				begin = Math.max(np-this.opts.num_edge_entries, interval.end);
 				this.appendRange(fragment, current_page, begin, np, {classes:'ep'});
@@ -107,6 +107,7 @@
 			if(this.opts.showSelect)fragment.append("<select class='tm_psize_go'><option value='10'>10</option><option value='12'>12</option><option value='15'>15</option><option value='20'>20</option><option value='30'>30</option><option value='40'>40</option><option value='50'>50</option></select>&nbsp;");
 			if(this.opts.showGo)fragment.append("<a href='javascript:void(0);'  style='float:left;'>共<label class='tmui_page_itemcount'>"+this.maxentries+"</label>条</a>&nbsp;<a href='javascript:void(0);' title='请输入其他页码' style='' class='tm_go'>GO</a><input type='text' title='请输入其他页码' class='tm_number' value='"+proxySzie+"' id='tm_pagego'/>");
 			return fragment;
+			
 			
 		}
 	});
@@ -266,11 +267,12 @@
 				selectPage_psize(0,pageSize);
 			});
 			
+			$(".tzui-tips").tzTip();
 			/*$(".tm_number").attr("title", " 请输入数字...").on("keydown",
 		    function(e) {
 		        return true;
 		    });*/
 		}
-	} // End of $.fn.tzPage block
+	}; // End of $.fn.tzPage block
 	
 })(jQuery);

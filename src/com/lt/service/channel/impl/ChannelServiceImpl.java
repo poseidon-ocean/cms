@@ -62,4 +62,14 @@ public class ChannelServiceImpl extends BaseServiceImpl<Channel,Integer>  implem
 	public int countChannel(TmParams params){
 		return getChannelDao().countChannel(params);
 	}
+
+	@Override
+	public List<Channel> findRootChannels(TmParams params, TmPageInfo pageInfo) {
+		return getChannelDao().findRootChannels(params, pageInfo);
+	}
+
+	@Override
+	public int countRootChannel(TmParams params) {
+		return getChannelDao().countRootChannel(params);
+	}
 }

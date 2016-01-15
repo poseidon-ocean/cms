@@ -43,5 +43,9 @@ public interface IChannelDao extends IBaseDao<Channel,Integer> {
 	 * @since  1.0.0
 	 */
 	public int countChannel(TmParams params);
+	//查询所有的内容
+	public List<Channel> findRootChannels(TmParams params, TmPageInfo pageInfo);
+	//求总数
+	public int countRootChannel(TmParams params);
 	
 }

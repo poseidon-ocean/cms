@@ -1,11 +1,13 @@
 package com.lt.core.dao;
 
+
 public class TmParams {
 
 	private String keyword;
 	private String date;
 	private Integer uid;
 	private String img;
+	private Integer channelId;
 
 	public String getKeyword() {
 		return keyword;
@@ -37,6 +39,14 @@ public class TmParams {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Integer getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
 	}
 	
 	

@@ -1,17 +1,24 @@
 package com.lt.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.Where;
 
 /**
  * 
@@ -29,12 +36,20 @@ public class Channel implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;// 主键
 	private String name;// 名称
+	private String link;// 栏目的链接
+	private String keyword;// 关键字 seo
+	private String description;// 描述 seo
 	private Integer isDelete;// 删除状态0未删除1删除
 	private Integer status;// 0未发布1发布
+	private String logo;//栏目logo
+	private Integer sort;//排序号
 	private Date createTime;// 创建时间
 	private Date updateTime;// 更新时间
 	private User user;// 操作用户
-
+	private Channel parent;//主外键管理
+	private List<Channel> channels = new ArrayList<Channel>(0);//子类，自身映射 
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
@@ -43,6 +58,33 @@ public class Channel implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Column(name = "link", length = 200)
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	@Column(name = "keyword", length = 100)
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	@Column(name = "description")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Column(name = "name", length = 100)
@@ -99,5 +141,46 @@ public class Channel implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	
+	@ManyToOne
+	@JoinColumn(name="parent_id")
+	public Channel getParent() {
+		return parent;
+	}
+
+	public void setParent(Channel parent) {
+		this.parent = parent;
+	}
+	
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="parent")//宿主没有了
+	@Where(clause="is_delete = 0 ")//必须是表中的字段
+	@OrderBy("sort asc")//具体类的属性名100 1000 1000
+	public List<Channel> getChannels() {
+		return channels;
+	}
+
+	public void setChannels(List<Channel> channels) {
+		this.channels = channels;
+	}
+
+	
+	@Column(name="logo",length=100)
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	@Column(name="sort")
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }

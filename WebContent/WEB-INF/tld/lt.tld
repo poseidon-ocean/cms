@@ -28,6 +28,41 @@
 	</tag>
 	
 	<tag>
+		<description>栏目标签</description>
+		<name>channelList</name>
+		<tag-class>com.lt.core.tag.LtChannelListTag</tag-class>
+		<body-content>scriptless</body-content> 
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+		<attribute>
+			<name>pid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+	</tag>
+	
+	<tag>
+		<description>查询Content实体内容</description>
+		<name>contentBean</name>
+		<tag-class>com.lt.core.tag.ContentBeanTag</tag-class>
+		<!-- 如果没有标签体，设置empty , 如果有标签休必须设置JSP -->
+		<body-content>empty</body-content>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
 		<description>if标签</description>
 		<name>if</name>
 		<tag-class>com.lt.core.tag.TmIfTag</tag-class>
@@ -61,13 +96,12 @@
 		<body-content>empty</body-content>
 	</tag>
 	
-	
 	<function>
 		<description>地图解析</description>
 		<name>toMap</name>
 		<function-class>com.lt.util.LtFunctions</function-class>
 		<function-signature>java.lang.String toMap(java.lang.String)</function-signature>
-		<example>${lt:toMap("1#22#22#33")}===</example>
+		<example>${rz:toMap("1#22#22#33")}===</example>
 	</function>
 	
 	
@@ -76,7 +110,7 @@
 		<name>size</name>
 		<function-class>com.lt.util.LtFunctions</function-class>
 		<function-signature>int getLength(java.util.Collection)</function-signature>
-		<example>${lt:size(lists)}==2=</example>
+		<example>${rz:size(lists)}==2=</example>
 	</function>
 	
 	<function>
@@ -84,7 +118,7 @@
 		<name>dateFormat</name>
 		<function-class>com.lt.util.LtFunctions</function-class>
 		<function-signature>java.lang.String dateFormat(java.lang.String,java.lang.String)</function-signature>
-		<example>${lt:dateFormat("1#22#22#33")}===</example>
+		<example>${rz:dateFormat("1#22#22#33")}===</example>
 	</function>
 	
 	<function>
@@ -92,7 +126,7 @@
 		<name>formateDate</name>
 		<function-class>com.lt.util.LtFunctions</function-class>
 		<function-signature>java.lang.String formateDate(java.util.Date,java.lang.String)</function-signature>
-		<example>${lt:formateDate("1#22#22#33")}===</example>
+		<example>${rz:formateDate("1#22#22#33")}===</example>
 	</function>
 	
 	<function>

@@ -39,15 +39,15 @@ var pageNo = 0;
 var pageSize = 10; 
 function lt_initPage(itemCount){
 	$("#page").tzPage(itemCount, {
-	num_edge_entries : 1, //边缘页数
-	num_display_entries :2, //主体页数
-	num_edge_entries:2,
-	current_page:0,
-	showGo:true,
-	showSelect:true,
-	items_per_page : pageSize, //每页显示X项
-	prev_text : "前一页",
-	next_text : "后一页",
+		num_edge_entries : 1, //边缘页数
+		num_display_entries :2, //主体页数
+		num_edge_entries:2,
+		current_page:0,
+		showGo:true,
+		showSelect:true,
+		items_per_page : pageSize, //每页显示X项
+		prev_text : "前一页",
+		next_text : "后一页",
 		callback : function(pageNo,psize){
 			lt_loadingTemplate(pageNo,psize);
 		}
@@ -111,3 +111,32 @@ function lt_delete(obj){
 		}
 	}});
 };
+
+//更新排序
+function lt_update_sort(obj){
+	var opid = $(obj).data("opid");
+	var text = obj.value;
+	$.ajax({
+		type:"post",
+		url:basePath+"/json/channel/update",
+		data:{"channel.id":opid,"channel.sort":text},
+		success:function(data){
+			 loading("排序更新成功...",4);
+		}
+	});
+}
+
+function lt_channelexpand(obj){
+	var opid = $(obj).data("opid");
+	var text = $(obj).text();
+	//切换按钮
+	$(".tzui-expand").text("+");
+	$(".tmui-channel-c").hide();
+	if(text=="+"){
+		$(".tz-items-"+opid+"-c").show();
+		$(obj).text("-");
+	}else{
+		$(".tz-items-"+opid+"-c").hide();
+		$(obj).text("+");
+	}
+}

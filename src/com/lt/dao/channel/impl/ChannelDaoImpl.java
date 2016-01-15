@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -75,6 +76,35 @@ public class ChannelDaoImpl extends BaseDaoImpl<Channel,Integer> implements ICha
 		}
 		detachedCriteria.setProjection(Projections.count("id"));
 		detachedCriteria.add(Restrictions.eq("isDelete",0));
+		Number number = (Number)detachedCriteria.getExecutableCriteria(getSession()).uniqueResult();
+		return number==null?0:number.intValue();
+	}
+
+	@Override
+	public List<Channel> findRootChannels(TmParams params, TmPageInfo pageInfo) {
+		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
+		if(params != null){
+			if(LtStringUtils.isNotEmpty(params.getKeyword())){
+				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
+			}
+		}
+		detachedCriteria.add(Restrictions.isNull("parent.id"));
+		detachedCriteria.addOrder(Order.asc("sort"));
+		detachedCriteria.add(Restrictions.eq("isDelete",0));
+		return findByDetachedCriteria(detachedCriteria, pageInfo);
+	}
+
+	@Override
+	public int countRootChannel(TmParams params) {
+		DetachedCriteria detachedCriteria = getCurrentDetachedCriteria();
+		if(params != null){
+			if(LtStringUtils.isNotEmpty(params.getKeyword())){
+				detachedCriteria.add(Restrictions.like("name", params.getKeyword(),MatchMode.ANYWHERE));
+			}
+		}
+		detachedCriteria.add(Restrictions.isNull("parent.id"));
+		detachedCriteria.setProjection(Projections.count("id"));
+		detachedCriteria.add(Restrictions.eq("isDelete", 0));
 		Number number = (Number)detachedCriteria.getExecutableCriteria(getSession()).uniqueResult();
 		return number==null?0:number.intValue();
 	}

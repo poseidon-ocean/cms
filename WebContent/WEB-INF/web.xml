@@ -20,16 +20,16 @@
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 	<!-- 这个配置是指,hiberante在进行级联查询的时候，可以会牵涉session关闭而无法获取session对象 session会话的延续，消耗性能 -->
-	<!-- <filter> -->
-	<!-- <filter-name>hibernateFilter</filter-name> -->
-	<!-- <filter-class> -->
-	<!-- org.springframework.orm.hibernate4.support.OpenSessionInViewFilter -->
-	<!-- </filter-class> -->
-	<!-- </filter> -->
-	<!-- <filter-mapping> -->
-	<!-- <filter-name>hibernateFilter</filter-name> -->
-	<!-- <url-pattern>/*</url-pattern> -->
-	<!-- </filter-mapping> -->
+	<filter> 
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate4.support.OpenSessionInViewFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
 
 	<!-- 编码拦截控制 -->
 	<filter>

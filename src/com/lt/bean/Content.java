@@ -50,6 +50,7 @@ public class Content implements java.io.Serializable {
 	private Date createTime;// 创建时间
 	private Date updateTime;// 更新时间
 	private User user;// 操作用户
+	private Channel channel;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -261,5 +262,15 @@ public class Content implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@JSON(serialize=false)
+	@ManyToOne
+	@JoinColumn(name="c_channel_id")
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 }

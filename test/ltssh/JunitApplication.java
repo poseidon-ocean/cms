@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.lt.bean.Channel;
 import com.lt.bean.Content;
 import com.lt.core.dao.TmParams;
+import com.lt.dao.channel.IChannelDao;
 import com.lt.dao.content.IContentDao;
 import com.lt.dao.permission.IPermissionDao;
 import com.lt.service.permission.IPermissionService;
@@ -42,6 +44,9 @@ public class JunitApplication {
 	
 	@Autowired
 	private IContentDao contentDao;
+	
+	@Autowired
+	private IChannelDao channelDao;
 	
 //	@Test
 //	public void handler() throws JSONException{
@@ -187,9 +192,24 @@ public class JunitApplication {
 	}
 	
 	@Test
-	public void handler7(){
+	public void handler7(){//channelDao
 		Content content = contentDao.get(1);
 		System.out.println(content.getTitle());
+	}
+	
+	@Test
+	public void handler8(){
+		Date sdate = new Date();
+		Channel channel = null;
+		for (int i = 0; i < 100;i++) {
+			channel = new Channel();
+			channel.setName("8888");
+			channel.setSort(5+i);
+			channelDao.save(channel);
+			System.out.println("==========="+i+"已保存成功==========");
+		}
+		long time = new Date().getTime() - sdate.getTime();
+		System.out.println("一共耗时:"+(time/1000)+"s");
 	}
 	
 }

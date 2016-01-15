@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="js/sg/css/sg.css">
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/tz_util.js"></script>
+	<script type="text/javascript" src="js/sg/lt_util.js"></script>
 	<script type="text/javascript" src="js/sg/sg.js"></script>
   </head>
   <body>
@@ -26,17 +26,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="ccc"></div>
     <script type="text/javascript">
     
-    window.localtion.href = "/index";
-//     	loading("大家好!");
-//     	$(".t").tzTab();
-//     	$(".t").tzSlider({horizontal:false});
-//     	$(".ccc").tzSlider({horizontal:true});
-    	//$.tzAlert({content:"您确定删除吗"});
-//     	$.tzPrompt({content:"请输入",value:"123456",callback:function(ok){
-//     		if(ok){
-//     			alert(ok);
-//     		}
-//     	}});
+   // window.location.href = "http://localhost:8081/ltcms/index";
+    // 	loading("大家好!",6,true);
+     //	$(".t").tzTab();
+     //	$(".t").tzSlider({horizontal:false});
+     //	$(".ccc").tzSlider({horizontal:false});
+    //	$.tzAlert({content:"您确定删除吗"});
+     //	$.tzPrompt({width:400,content:"请输入",value:"123456",callback:function(ok){
+//		if(ok){
+//			loading(ok);
+//		}else{
+//			loading('请重新输入');
+//			return;
+//		}
+//	}});
     </script>
   </body>
 </html>
