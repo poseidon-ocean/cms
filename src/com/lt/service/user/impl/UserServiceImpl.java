@@ -3,11 +3,12 @@ package com.lt.service.user.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lt.base.BaseServiceImpl;
 import com.lt.bean.User;
 import com.lt.dao.user.IUserDao;
 import com.lt.service.user.IUserService;
 @Service
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;

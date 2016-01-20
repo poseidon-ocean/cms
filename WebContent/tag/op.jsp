@@ -32,12 +32,14 @@
 			$.ajax({
 				type:"post",
 				url:"sop.jsp",
+				data:{source:data},
 				success:function(data){
 					alert("静态化成功");
 				},
 				error:function(){
 					
 				}
+			});
 		}
 	</script>
 </body>

@@ -1,9 +1,10 @@
 package com.lt.service.user;
 
+import com.lt.base.IBaseService;
 import com.lt.bean.User;
 
 
-public interface IUserService {
+public interface IUserService extends IBaseService<User, Integer> {
 	/**
 	 * 根据账号和密码查询用户是否存在
 	 * 方法名：findExitUser
