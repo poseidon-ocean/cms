@@ -60,6 +60,13 @@ public class LtStringUtils {
 		return string;
 	}
 	
+	public static String getPercent(double percent) {
+		return new DecimalFormat("#.##").format(percent);
+	}
+
+	public static String getPercent(float percent) {
+		return new DecimalFormat("#.##").format(percent);
+	}
 	
 	/**
 	 * 判断字符串是否为空

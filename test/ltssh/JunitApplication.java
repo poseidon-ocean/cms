@@ -3,6 +3,7 @@ package ltssh;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +13,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lt.bean.Channel;
 import com.lt.bean.Content;
+import com.lt.bean.User;
 import com.lt.core.dao.TmParams;
 import com.lt.dao.channel.IChannelDao;
 import com.lt.dao.content.IContentDao;
 import com.lt.dao.permission.IPermissionDao;
 import com.lt.service.permission.IPermissionService;
 import com.lt.service.user.IUserService;
+import com.lt.service.ws.IUserServiceWeb;
 import com.lt.util.TmPageInfo;
 
 /**
@@ -47,6 +50,17 @@ public class JunitApplication {
 	
 	@Autowired
 	private IChannelDao channelDao;
+	
+	@Autowired
+	private IUserServiceWeb userServiceWeb;
+	
+	@Test
+	public void handler01() throws Exception{
+		List<User> maps =  userServiceWeb.findUsers();
+		for(User user:maps){
+			System.out.println(user.getUsername());
+		}
+	}
 	
 //	@Test
 //	public void handler() throws JSONException{

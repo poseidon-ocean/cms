@@ -20,7 +20,7 @@
   <div class="container">
 	<%@include file="/commons/header.jsp" %>
      <div id="channelbox" class="ht_con clearfix" style="min-height: 700px;">
-          <a href="${basePath}/admin/channel/edit">添加栏目管理</a>
+          <a href="${basePath}/admin/channel/add">添加栏目管理</a>
           <div class="tzui-btnbox">
           	<input type="text" class="tzui_inp" id="keyword" placeholder="请输入关键字...">
           	<a class="tzui-btn" id="tzui_search" class="search" onclick="lt_search(this)">搜索</a>

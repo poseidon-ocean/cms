@@ -27,7 +27,7 @@ public class UserServiceWebImpl implements IUserServiceWeb {
 	}
 
 	@Override
-	public String loveYou(String msg) {
+	public String hello(String msg) {
 		System.out.println(msg);
 		return "你的信息收到了";
 	}

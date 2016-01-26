@@ -82,6 +82,7 @@ public class ChannelAction extends BaseAction{
 		return "edit";
 	}
 	
+	
 	/**
 	 * 保存方法
 	 * 方法名：save

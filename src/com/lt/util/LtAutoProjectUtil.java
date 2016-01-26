@@ -17,10 +17,10 @@ import org.apache.commons.io.FileUtils;
 public class LtAutoProjectUtil {
 	
 	private static String author="poseidon";
-	private static  String description = "栏目管理";
+	private static  String description = "统计管理";
 	private static  String date = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
-	private static  String entity = "Channel";
-	private static  String lowEntity = "channel";
+	private static  String entity = "Stat";
+	private static  String lowEntity = "stat";
 	
 	//定义所有模板目录
 	

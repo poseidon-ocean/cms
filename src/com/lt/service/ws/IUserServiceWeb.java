@@ -21,5 +21,5 @@ public interface IUserServiceWeb {
 
 	public boolean saveUser(User user);
 	
-	public String loveYou(String msg);
+	public String hello(String msg);
 }

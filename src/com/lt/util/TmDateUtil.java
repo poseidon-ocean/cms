@@ -88,4 +88,22 @@ public class TmDateUtil {
 			return "";
 		}
 	}
+	
+	/**
+	 * 格式化日期类 
+	 * 
+	 * @param date
+	 * @param pattern
+	 * @return 返回类型：String
+	 * @exception
+	 * @since 1.0.0
+	 */
+	public static String formatDate(Date date, String pattern) {
+		if (date != null) {
+			String dateString = new SimpleDateFormat(pattern).format(date);
+			return dateString;
+		} else {
+			return "";
+		}
+	}
 }
