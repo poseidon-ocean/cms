@@ -44,9 +44,9 @@ public class TmLogAopInterceptor2 {
 			//方法名
 			methodName = point.getSignature().getName();
 			//clz获取对应注解信息
-			LtLog tzLog = (LtLog) clz.getAnnotation(LtLog.class);
-			if(tzLog!=null){
-				model = tzLog.name();
+			LtLog ltLog = (LtLog) clz.getAnnotation(LtLog.class);
+			if(ltLog!=null){
+				model = ltLog.name();
 				//获取该类下面所有的方法
 				Method[] methods = clz.getDeclaredMethods();
 				for (Method method : methods) {

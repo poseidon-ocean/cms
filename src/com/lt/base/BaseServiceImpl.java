@@ -17,7 +17,6 @@ public class BaseServiceImpl<T,PK extends Serializable> implements IBaseService<
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
 	private IBaseDao<T,PK> baseDao ;
 
 	public IBaseDao<T,PK> getBaseDao() {
