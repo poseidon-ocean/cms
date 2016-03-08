@@ -3,6 +3,8 @@ package ltssh;
 
 
 
+import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -31,6 +33,13 @@ public class TestJDBC {
 		
 		Connection connection = data.getConnection();
 		System.out.println("+==="+connection);
+		
 	}
-	
+	@Test
+	public void testChar() throws Exception {
+		char a = 'a' + 'b';
+		System.out.println();
+		System.out.println(a);
+		System.out.println('a'+'b');
+	}
 }
