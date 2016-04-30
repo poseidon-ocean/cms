@@ -10,9 +10,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.JSONUtil;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 
 import com.lt.base.BaseAction;
@@ -44,6 +48,12 @@ public class UploadAction extends BaseAction {
 	}
 	public String demo2(){
 		return "demo2";
+	}
+	public String demo3(){
+		return "demo3";
+	}
+	public String demo4(){
+		return "demo4";
 	}
 	//第一步建立uploadaction
 		//第二部配置uploaaction
@@ -106,6 +116,65 @@ public class UploadAction extends BaseAction {
 			}
 		}
 		return "callback";
+	}
+	
+	public void ajaxupload() {
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		//1：上传放入服务器，如何获取服务器的上传的路径
+		String uploadPath = ServletActionContext.getServletContext().getRealPath("upload");
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String filename = request.getParameter("filename");
+		System.out.println(filename);
+		//2：如果服务器上传路径不存在，就创建
+		File dirPath = new File(uploadPath);
+		if(!dirPath.exists()){
+			dirPath.mkdirs();
+		}
+		//3:进行io流读写，将本地的图片上传到服务器的上传路基下
+		//对上传文件的重命名
+		String newFileName = generateFileName(fileFileName);
+		//文件上传了 io也可以用FileUtils
+		//建立文件上传的缓存读和写的流
+		BufferedOutputStream outputStream =null;//reponse.getWriter(),它也是一个输出流.往浏览器输出的
+		BufferedInputStream inputStream = null;
+		try {
+			//将文件开始输入流
+			FileInputStream fis = new FileInputStream(file);
+			inputStream = new BufferedInputStream(fis);
+			//输出流
+			FileOutputStream out = new FileOutputStream(new File(dirPath,newFileName));
+			outputStream = new BufferedOutputStream(out);
+			//以多少开始读取文件的流 文件，
+			byte[] buf = new byte[4096];
+			int len = -1;
+			while((len = inputStream.read(buf))!=-1){//读客户端的文件
+				outputStream.write(buf, 0, len);//写入到服务器
+			}
+			map.put("name", newFileName);
+			map.put("oldName", fileFileName);
+			map.put("url", "upload/"+newFileName);
+			map.put("size", file.length());
+			map.put("ext", TmFileUtil.getExtNoPoint(fileFileName));
+			map.put("type", fileContentType);
+			map.put("path", "upload");
+			map.put("sizeString", TmFileUtil.countFileSize(file.length()));
+			result = JSONUtil.serialize(map);
+			
+			response.getWriter().print(result);
+		} catch (Exception e) {
+		} finally{
+			
+			try {
+				if(outputStream!=null){
+					outputStream.close();
+				}
+				if(inputStream!=null){
+					inputStream.close();
+				}
+			} catch (Exception e2) {
+			}
+		}
 	}
 	/**
 	 * 文件的重命名

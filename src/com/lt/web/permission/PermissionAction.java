@@ -38,7 +38,6 @@ public class PermissionAction {
 	/**
 	 * 
 	 * 保存
-	 * 创建人：keke 
 	 * 时间：2015年05月07日 23:16:41
 	 * @return String
 	 * @throws JSONException 

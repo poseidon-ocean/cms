@@ -34,10 +34,7 @@ public class StringUtils {
 	
 	/**
 	 * 空判断 
-	 * com.tz.util 
 	 * 方法名：isEmpty
-	 * 创建人：xuchengfei 
-	 * 时间：2015年9月1日-下午11:47:57 
 	 * @param content
 	 * @return boolean
 	 * @exception 
@@ -116,11 +113,7 @@ public class StringUtils {
 	
 	/**
 	 * 后去文件的后缀
-	 * com.tz.util 
 	 * 方法名：getExt
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年9月24日-下午10:01:53 
 	 * @param name 文件名称
 	 * @param flag true有点false没点
 	 * @return 
